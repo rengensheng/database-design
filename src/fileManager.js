@@ -5,10 +5,10 @@ import { showToast } from './toast.js';
 import { showModal } from './modal.js';
 
 // 检测是否在 Tauri 环境中
+// Tauri 2.0 默认不暴露 window.__TAURI__，必须使用 window.__TAURI_INTERNALS__ 判断
 function isTauri() {
-  return typeof window !== 'undefined' && window.__TAURI__ !== undefined;
+  return typeof window !== 'undefined' && window.__TAURI_INTERNALS__ !== undefined;
 }
-
 // 动态导入 Tauri 插件模块
 async function getTauriModules() {
   try {

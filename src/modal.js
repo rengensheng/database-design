@@ -1,6 +1,5 @@
 // modal.js — 模态框系统
-
-export function showModal({ title, body, footer, size = '' }) {
+export function showModal({ title, body, footer, size = '', onClose = null }) {
   const root = document.getElementById('modal-root');
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
@@ -27,7 +26,10 @@ export function showModal({ title, body, footer, size = '' }) {
   // Close handlers
   const close = () => {
     overlay.classList.remove('show');
-    setTimeout(() => overlay.remove(), 250);
+    setTimeout(() => {
+      overlay.remove();
+      if (onClose) onClose();
+    }, 250);
   };
 
   overlay.querySelector('.modal-close').addEventListener('click', close);

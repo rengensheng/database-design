@@ -21,9 +21,10 @@ function makeStreamModal({ title, promptLabel, placeholder, submitLabel, onGener
   if (aiModalOpen) return { overlay: null, close: () => {} };
   aiModalOpen = true;
 
-  const { overlay, close: baseClose } = showModal({
+  const { overlay, close } = showModal({
     title,
     size: 'lg',
+    onClose: () => { aiModalOpen = false; },
     body: `
       <div class="form-section">
         <div class="form-label">${promptLabel}</div>
@@ -41,11 +42,6 @@ function makeStreamModal({ title, promptLabel, placeholder, submitLabel, onGener
       <button class="btn primary" id="ai-apply" disabled>应用到画布</button>
     `,
   });
-
-  const close = () => {
-    aiModalOpen = false;
-    baseClose();
-  };
 
   const promptEl = document.getElementById('ai-prompt');
   const outputEl = document.getElementById('ai-output');
