@@ -134,6 +134,18 @@ body { font-family: var(--font-sans); background: var(--bg-primary); color: var(
   color: var(--accent-orange);
 }
 
+.toolbar-btn .trigger-chevron {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  opacity: 0.6;
+  transition: transform var(--ease-fast);
+}
+
+.toolbar-dropdown.open .toolbar-btn .trigger-chevron {
+  transform: rotate(180deg);
+}
+
 .toolbar-divider {
   width: 1px;
   height: 22px;
@@ -166,6 +178,71 @@ body { font-family: var(--font-sans); background: var(--bg-primary); color: var(
 .toolbar-project-name input:hover { border-color: var(--border-default); }
 .toolbar-project-name input:focus { border-color: var(--accent-orange); color: var(--text-primary); outline: none; }
 
+/* ---------- Toolbar Dropdown Menus ---------- */
+.toolbar-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 160px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 2px;
+  box-shadow: var(--shadow-modal);
+  padding: 4px;
+  display: none;
+  flex-direction: column;
+  gap: 1px;
+  z-index: 200;
+}
+
+.toolbar-dropdown.open .toolbar-dropdown-menu { display: flex; }
+
+.toolbar-dropdown.open .menu-trigger {
+  background: var(--bg-elevated);
+  border-color: var(--border-active);
+  color: var(--accent-orange);
+}
+
+.toolbar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--ease-fast);
+  white-space: nowrap;
+}
+
+.toolbar-menu-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+.toolbar-menu-item:active { transform: scale(0.98); }
+
+.toolbar-menu-item .lucide { width: 14px; height: 14px; flex-shrink: 0; }
+
+.toolbar-menu-divider {
+  height: 1px;
+  background: var(--border-default);
+  margin: 4px 0;
+}
 /* ---------- Main Layout ---------- */
 .main-layout {
   display: flex;

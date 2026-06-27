@@ -149,6 +149,38 @@ document.getElementById('project-name-input').addEventListener('change', (e) => 
 // Set initial project name
 document.getElementById('project-name-input').value = store.state.projectName;
 
+// ====== Toolbar dropdown menus ======
+function initToolbarDropdowns() {
+  const dropdowns = document.querySelectorAll('.toolbar-dropdown');
+
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.menu-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      closeAllToolbarDropdowns();
+      if (!isOpen) {
+        dropdown.classList.add('open');
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const dropdown = e.target.closest('.toolbar-dropdown');
+    if (!dropdown || e.target.closest('.toolbar-menu-item')) {
+      closeAllToolbarDropdowns();
+    }
+  });
+}
+
+function closeAllToolbarDropdowns() {
+  document.querySelectorAll('.toolbar-dropdown.open').forEach((d) => d.classList.remove('open'));
+}
+
+initToolbarDropdowns();
+
 // ====== Toolbar buttons ======
 
 // New table

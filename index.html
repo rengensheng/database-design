@@ -16,67 +16,118 @@
         <i data-lucide="database"></i>
         <span>DBForge</span>
       </div>
-      <button class="toolbar-btn" id="btn-new-project" title="新建项目">
-        <i data-lucide="file-plus"></i>
-        <span>新建</span>
-      </button>
-      <button class="toolbar-btn" id="btn-open-file" title="打开文件">
-        <i data-lucide="folder-open"></i>
-        <span>打开</span>
-      </button>
-      <button class="toolbar-btn" id="btn-save-file" title="保存文件">
-        <i data-lucide="save"></i>
-        <span>保存</span>
-      </button>
-      <button class="toolbar-btn" id="btn-save-as" title="另存为">
-        <i data-lucide="file-output"></i>
-        <span>另存为</span>
-      </button>
-      <button class="toolbar-btn" id="btn-recent-files" title="历史文件">
-        <i data-lucide="history"></i>
-        <span>历史</span>
-      </button>
+      <!-- 文件菜单 -->
+      <div class="toolbar-dropdown" data-menu="file">
+        <button class="toolbar-btn menu-trigger" title="文件">
+          <i data-lucide="file-text"></i>
+          <span>文件</span>
+          <i data-lucide="chevron-down" class="trigger-chevron"></i>
+        </button>
+        <div class="toolbar-dropdown-menu">
+          <button class="toolbar-menu-item" id="btn-new-project">
+            <i data-lucide="file-plus"></i>
+            <span>新建项目</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-open-file">
+            <i data-lucide="folder-open"></i>
+            <span>打开</span>
+          </button>
+          <div class="toolbar-menu-divider"></div>
+          <button class="toolbar-menu-item" id="btn-save-file">
+            <i data-lucide="save"></i>
+            <span>保存</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-save-as">
+            <i data-lucide="file-output"></i>
+            <span>另存为</span>
+          </button>
+          <div class="toolbar-menu-divider"></div>
+          <button class="toolbar-menu-item" id="btn-recent-files">
+            <i data-lucide="history"></i>
+            <span>历史文件</span>
+          </button>
+        </div>
+      </div>
+
       <div class="toolbar-divider"></div>
-      <button class="toolbar-btn" id="btn-new-table" title="新建表 (拖拽至画布)">
-        <i data-lucide="plus-square"></i>
-        <span>新建表</span>
-      </button>
-      <button class="toolbar-btn" id="btn-new-domain" title="新建主题域">
-        <i data-lucide="folder-plus"></i>
-        <span>主题域</span>
-      </button>
+
+      <!-- 创建菜单 -->
+      <div class="toolbar-dropdown" data-menu="create">
+        <button class="toolbar-btn menu-trigger" title="创建">
+          <i data-lucide="plus-square"></i>
+          <span>创建</span>
+          <i data-lucide="chevron-down" class="trigger-chevron"></i>
+        </button>
+        <div class="toolbar-dropdown-menu">
+          <button class="toolbar-menu-item" id="btn-new-table">
+            <i data-lucide="table-2"></i>
+            <span>新建表</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-new-domain">
+            <i data-lucide="folder-plus"></i>
+            <span>新建主题域</span>
+          </button>
+        </div>
+      </div>
+
       <div class="toolbar-divider"></div>
-      <button class="toolbar-btn" id="btn-export-sql" title="导出完整建表SQL">
-        <i data-lucide="download"></i>
-        <span>导出SQL</span>
-      </button>
-      <button class="toolbar-btn" id="btn-export-dict" title="导出数据字典">
-        <i data-lucide="file-text"></i>
-        <span>数据字典</span>
-      </button>
-      <button class="toolbar-btn" id="btn-version-diff" title="版本比对">
-        <i data-lucide="git-compare"></i>
-        <span>版本比对</span>
-      </button>
+
+      <!-- 工具菜单 -->
+      <div class="toolbar-dropdown" data-menu="tools">
+        <button class="toolbar-btn menu-trigger" title="工具">
+          <i data-lucide="tool"></i>
+          <span>工具</span>
+          <i data-lucide="chevron-down" class="trigger-chevron"></i>
+        </button>
+        <div class="toolbar-dropdown-menu">
+          <button class="toolbar-menu-item" id="btn-export-sql">
+            <i data-lucide="download"></i>
+            <span>导出SQL</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-export-dict">
+            <i data-lucide="file-text"></i>
+            <span>数据字典</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-version-diff">
+            <i data-lucide="git-compare"></i>
+            <span>版本比对</span>
+          </button>
+          <div class="toolbar-menu-divider"></div>
+          <button class="toolbar-menu-item" id="btn-reverse">
+            <i data-lucide="arrow-down-left"></i>
+            <span>导入SQL</span>
+          </button>
+        </div>
+      </div>
+
       <div class="toolbar-divider"></div>
-      <button class="toolbar-btn" id="btn-reverse" title="逆向工程">
-        <i data-lucide="arrow-down-left"></i>
-        <span>导入SQL</span>
-      </button>
+
+      <!-- AI 菜单 -->
+      <div class="toolbar-dropdown" data-menu="ai">
+        <button class="toolbar-btn menu-trigger" title="AI">
+          <i data-lucide="sparkles"></i>
+          <span>AI</span>
+          <i data-lucide="chevron-down" class="trigger-chevron"></i>
+        </button>
+        <div class="toolbar-dropdown-menu">
+          <button class="toolbar-menu-item" id="btn-ai-create">
+            <i data-lucide="sparkles"></i>
+            <span>AI 建表</span>
+          </button>
+          <button class="toolbar-menu-item" id="btn-ai-connect">
+            <i data-lucide="network"></i>
+            <span>AI 自动连线</span>
+          </button>
+          <div class="toolbar-menu-divider"></div>
+          <button class="toolbar-menu-item" id="btn-ai-config">
+            <i data-lucide="settings"></i>
+            <span>AI 设置</span>
+          </button>
+        </div>
+      </div>
+
       <div class="toolbar-divider"></div>
-      <button class="toolbar-btn" id="btn-ai-create" title="AI 建表">
-        <i data-lucide="sparkles"></i>
-        <span>AI建表</span>
-      </button>
-      <button class="toolbar-btn" id="btn-ai-connect" title="AI 自动连线">
-        <i data-lucide="network"></i>
-        <span>AI连线</span>
-      </button>
-      <button class="toolbar-btn" id="btn-ai-config" title="AI 设置">
-        <i data-lucide="settings"></i>
-        <span>AI设置</span>
-      </button>
-      <div class="toolbar-divider"></div>
+
       <button class="toolbar-btn" id="btn-theme" title="切换主题">
         <i data-lucide="sun-moon"></i>
         <span>主题</span>
