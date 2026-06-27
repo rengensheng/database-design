@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Background: rounded square with industrial dark -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1e22"/>
+      <stop offset="1" stop-color="#161618"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0a500"/>
+      <stop offset="1" stop-color="#d4880a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="80" y="80" width="864" height="864" rx="180" fill="url(#bg)" stroke="#333338" stroke-width="3"/>
+
+  <!-- Database cylinder icon -->
+  <!-- Top ellipse -->
+  <ellipse cx="512" cy="280" rx="200" ry="60" fill="none" stroke="url(#orange)" stroke-width="20"/>
+  <!-- Cylinder body -->
+  <path d="M 312 280 L 312 640 A 200 60 0 0 0 712 640 L 712 280" fill="none" stroke="url(#orange)" stroke-width="20" stroke-linejoin="round"/>
+  <!-- Middle ellipse lines -->
+  <path d="M 312 400 A 200 60 0 0 0 712 400" fill="none" stroke="#4a90d9" stroke-width="14" opacity="0.6"/>
+  <path d="M 312 520 A 200 60 0 0 0 712 520" fill="none" stroke="#4a90d9" stroke-width="14" opacity="0.4"/>
+
+  <!-- Connection lines (FK relationships) -->
+  <circle cx="312" cy="340" r="8" fill="#f0a500"/>
+  <circle cx="712" cy="340" r="8" fill="#f0a500"/>
+  <path d="M 320 340 Q 512 460 704 340" fill="none" stroke="#4a90d9" stroke-width="8" stroke-dasharray="12 8" opacity="0.5"/>
+
+  <!-- Bottom: table grid hint -->
+  <rect x="350" y="720" width="324" height="8" rx="4" fill="#333338"/>
+  <rect x="380" y="744" width="264" height="8" rx="4" fill="#333338" opacity="0.6"/>
+  <rect x="410" y="768" width="204" height="8" rx="4" fill="#333338" opacity="0.3"/>
+</svg>

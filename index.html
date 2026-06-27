@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBForge — Database Design Studio</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Toolbar -->
+    <div class="toolbar" id="toolbar">
+      <div class="toolbar-brand">
+        <i data-lucide="database"></i>
+        <span>DBForge</span>
+      </div>
+      <button class="toolbar-btn" id="btn-new-project" title="新建项目">
+        <i data-lucide="file-plus"></i>
+        <span>新建</span>
+      </button>
+      <button class="toolbar-btn" id="btn-open-file" title="打开文件">
+        <i data-lucide="folder-open"></i>
+        <span>打开</span>
+      </button>
+      <button class="toolbar-btn" id="btn-save-file" title="保存文件">
+        <i data-lucide="save"></i>
+        <span>保存</span>
+      </button>
+      <button class="toolbar-btn" id="btn-save-as" title="另存为">
+        <i data-lucide="file-output"></i>
+        <span>另存为</span>
+      </button>
+      <button class="toolbar-btn" id="btn-recent-files" title="历史文件">
+        <i data-lucide="history"></i>
+        <span>历史</span>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="toolbar-btn" id="btn-new-table" title="新建表 (拖拽至画布)">
+        <i data-lucide="plus-square"></i>
+        <span>新建表</span>
+      </button>
+      <button class="toolbar-btn" id="btn-new-domain" title="新建主题域">
+        <i data-lucide="folder-plus"></i>
+        <span>主题域</span>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="toolbar-btn" id="btn-export-sql" title="导出完整建表SQL">
+        <i data-lucide="download"></i>
+        <span>导出SQL</span>
+      </button>
+      <button class="toolbar-btn" id="btn-export-dict" title="导出数据字典">
+        <i data-lucide="file-text"></i>
+        <span>数据字典</span>
+      </button>
+      <button class="toolbar-btn" id="btn-version-diff" title="版本比对">
+        <i data-lucide="git-compare"></i>
+        <span>版本比对</span>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="toolbar-btn" id="btn-reverse" title="逆向工程">
+        <i data-lucide="arrow-down-left"></i>
+        <span>导入SQL</span>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="toolbar-btn" id="btn-ai-create" title="AI 建表">
+        <i data-lucide="sparkles"></i>
+        <span>AI建表</span>
+      </button>
+      <button class="toolbar-btn" id="btn-ai-connect" title="AI 自动连线">
+        <i data-lucide="network"></i>
+        <span>AI连线</span>
+      </button>
+      <button class="toolbar-btn" id="btn-ai-config" title="AI 设置">
+        <i data-lucide="settings"></i>
+        <span>AI设置</span>
+      </button>
+      <div class="toolbar-divider"></div>
+      <button class="toolbar-btn" id="btn-theme" title="切换主题">
+        <i data-lucide="sun-moon"></i>
+        <span>主题</span>
+      </button>
+      <div class="toolbar-spacer"></div>
+      <div class="toolbar-project-name">
+        <i data-lucide="folder" style="width:11px;height:11px;vertical-align:-1px;color:var(--text-muted)"></i>
+        <input type="text" id="project-name-input" placeholder="项目名称" value="未命名项目">
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+      <!-- Sidebar -->
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <span class="sidebar-title">主题域管理</span>
+          <button class="collapse-btn" id="btn-collapse-sidebar" title="折叠侧栏">
+            <i data-lucide="panel-left-close"></i>
+          </button>
+        </div>
+        <div class="sidebar-body" id="sidebar-body">
+          <!-- Domain tree populated by JS -->
+        </div>
+        <div class="sidebar-footer">
+          <button class="btn ghost sm" id="btn-add-domain" style="width:100%;justify-content:center">
+            <i data-lucide="plus"></i>
+            <span>新建主题域</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Area -->
+      <div class="canvas-area">
+        <div class="canvas-viewport" id="canvas-viewport">
+          <svg class="canvas-grid" id="canvas-grid"></svg>
+          <div class="canvas-content" id="canvas-content">
+            <svg class="connection-layer" id="connection-layer"></svg>
+            <!-- Tables rendered here by JS -->
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div class="canvas-empty" id="canvas-empty">
+          <i data-lucide="layout-grid"></i>
+          <div class="canvas-empty-text">点击"新建表"或拖拽创建数据表</div>
+        </div>
+
+        <!-- Canvas controls -->
+        <div class="canvas-controls">
+          <button class="canvas-control-btn" id="btn-zoom-in" title="放大"><i data-lucide="zoom-in"></i></button>
+          <div class="canvas-zoom-label" id="zoom-label">100%</div>
+          <button class="canvas-control-btn" id="btn-zoom-out" title="缩小"><i data-lucide="zoom-out"></i></button>
+          <button class="canvas-control-btn" id="btn-zoom-fit" title="适应屏幕"><i data-lucide="maximize"></i></button>
+          <button class="canvas-control-btn" id="btn-zoom-reset" title="重置缩放"><i data-lucide="locate-fixed"></i></button>
+        </div>
+      </div>
+
+      <!-- Properties Panel -->
+      <div class="properties-panel" id="properties-panel">
+        <div class="props-header">
+          <span class="props-title props-title-text">属性面板</span>
+          <button class="collapse-btn" id="btn-collapse-props" title="折叠属性面板">
+            <i data-lucide="panel-right-close"></i>
+          </button>
+        </div>
+        <div class="props-body" id="props-body">
+          <div class="props-empty">
+            <i data-lucide="mouse-pointer-click"></i>
+            <div class="props-empty-text">选择表或字段以编辑属性</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-item">
+        <i data-lucide="table-2"></i>
+        <span id="status-tables">0 表</span>
+      </div>
+      <div class="status-item">
+        <i data-lucide="link-2"></i>
+        <span id="status-connections">0 外键</span>
+      </div>
+      <div class="status-item">
+        <i data-lucide="folder"></i>
+        <span id="status-domains">0 主题域</span>
+      </div>
+      <div class="status-item" id="status-filepath" style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <i data-lucide="file"></i>
+        <span id="status-filepath-text">未保存</span>
+      </div>
+      <div class="status-spacer"></div>
+      <div class="status-item status-save-indicator" id="status-save">
+        <i data-lucide="check-circle"></i>
+        <span>已保存</span>
+      </div>
+      <div class="status-item">
+        <span id="status-version">v1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modal-root"></div>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+  <!-- Context Menu -->
+  <div class="context-menu" id="context-menu"></div>
+  <!-- Hidden file input -->
+  <input type="file" id="file-input" class="hidden" accept=".json">
+
+  <!-- App Scripts -->
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
